@@ -7,364 +7,232 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0d0f14;
-      --card: #14171f;
-      --card2: #1a1e28;
-      --border: #252a38;
-      --accent: #f5a623;
-      --accent2: #e8521a;
-      --text: #eef0f6;
-      --muted: #7a8099;
-      --green: #27c97a;
-      --red: #e84545;
-      --radius: 16px;
+      --bg: #0d0f14; --card: #14171f; --card2: #1a1e28; --border: #252a38;
+      --accent: #f5a623; --accent2: #e8521a; --text: #eef0f6; --muted: #7a8099;
+      --green: #27c97a; --red: #e84545; --radius: 16px;
     }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 40px;
-      background: rgba(13,15,20,0.85);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-    }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1.5rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+    nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; background: rgba(13,15,20,0.85); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
     .logo span { -webkit-text-fill-color: var(--text); }
-
-    /* ── SCREENS ── */
     .screen { display: none; animation: fadeIn 0.4s ease; }
     .screen.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative; z-index: 1;
-      text-align: center;
-      padding: 100px 40px 80px;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(245,166,35,0.12);
-      border: 1px solid rgba(245,166,35,0.3);
-      color: var(--accent);
-      font-size: 0.8rem; font-weight: 500;
-      padding: 6px 16px; border-radius: 100px;
-      margin-bottom: 28px; letter-spacing: 1px; text-transform: uppercase;
-    }
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 800; line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
-    }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      color: var(--muted); font-size: 1.15rem; max-width: 500px; margin: 0 auto 48px;
-      line-height: 1.7;
-    }
+    .hero { position: relative; z-index: 1; text-align: center; padding: 100px 40px 80px; }
+    .hero-badge { display: inline-block; background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.3); color: var(--accent); font-size: 0.8rem; font-weight: 500; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; letter-spacing: 1px; text-transform: uppercase; }
+    .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--muted); font-size: 1.15rem; max-width: 500px; margin: 0 auto 48px; line-height: 1.7; }
     .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-    /* ── BUTTONS ── */
-    .btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem; font-weight: 500;
-      padding: 14px 28px; border-radius: 12px;
-      border: none; cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(245,166,35,0.25);
-    }
+    .btn { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; padding: 14px 28px; border-radius: 12px; border: none; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 8px 24px rgba(245,166,35,0.25); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(245,166,35,0.35); }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .btn-ghost {
-      background: var(--card2); color: var(--text);
-    }
+    .btn-ghost { background: var(--card2); color: var(--text); }
     .btn-ghost:hover { background: var(--border); }
     .btn-sm { padding: 9px 18px; font-size: 0.85rem; border-radius: 9px; }
-    .btn-danger { background: var(--red); color: #fff; }
     .btn-success { background: var(--green); color: #fff; }
-
-    /* ── STATS ── */
-    .stats {
-      display: flex; justify-content: center; gap: 48px;
-      padding: 40px; flex-wrap: wrap;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
+    .stats { display: flex; justify-content: center; gap: 48px; padding: 40px; flex-wrap: wrap; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .stat { text-align: center; }
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem; font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
-
-    /* ── CONTAINER ── */
     .container { max-width: 1100px; margin: 0 auto; padding: 40px; position: relative; z-index: 1; }
-
-    /* ── SECTION TITLE ── */
-    .sec-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.8rem; font-weight: 700;
-      margin-bottom: 8px; letter-spacing: -0.5px;
-    }
+    .sec-title { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
     .sec-sub { color: var(--muted); margin-bottom: 32px; }
-
-    /* ── PANEL CARDS ── */
     .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 800px; margin: 60px auto; padding: 0 40px; }
-    .panel-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px 32px;
-      cursor: pointer;
-      transition: all 0.25s;
-      text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .panel-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(245,166,35,0.05), transparent);
-      opacity: 0; transition: opacity 0.25s;
-    }
+    .panel-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px 32px; cursor: pointer; transition: all 0.25s; text-align: center; position: relative; overflow: hidden; }
+    .panel-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(245,166,35,0.05), transparent); opacity: 0; transition: opacity 0.25s; }
     .panel-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,0.4); }
     .panel-card:hover::before { opacity: 1; }
     .panel-icon { font-size: 3rem; margin-bottom: 20px; }
     .panel-title { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
     .panel-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
-
-    /* ── FORM ── */
-    .form-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px;
-      max-width: 600px; margin: 0 auto;
-    }
-    .form-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; }
+    .form-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; max-width: 500px; margin: 0 auto; }
+    .form-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .form-subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 28px; }
     .form-group { margin-bottom: 20px; }
     label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-    input, select, textarea {
-      width: 100%; padding: 13px 16px;
-      background: var(--card2); border: 1px solid var(--border);
-      border-radius: 10px; color: var(--text);
-      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-      transition: border-color 0.2s;
-      outline: none;
-    }
+    input, select, textarea { width: 100%; padding: 13px 16px; background: var(--card2); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; transition: border-color 0.2s; outline: none; }
     input:focus, select:focus, textarea:focus { border-color: var(--accent); }
     select option { background: var(--card2); }
     textarea { resize: vertical; min-height: 80px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-actions { display: flex; gap: 12px; margin-top: 8px; }
-
-    /* ── PROPERTY CARDS ── */
+    .form-switch { text-align: center; margin-top: 20px; color: var(--muted); font-size: 0.9rem; }
+    .form-switch a { color: var(--accent); cursor: pointer; text-decoration: none; }
+    .form-switch a:hover { text-decoration: underline; }
+    .input-error { border-color: var(--red) !important; }
+    .error-msg { color: var(--red); font-size: 0.82rem; margin-top: 6px; }
     .properties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-    .prop-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: all 0.25s;
-    }
+    .prop-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.25s; }
     .prop-card:hover { border-color: rgba(245,166,35,0.4); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
-    .prop-header {
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: flex-start;
-    }
-    .prop-type-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 5px 12px; border-radius: 100px;
-      font-size: 0.78rem; font-weight: 500;
-      background: rgba(245,166,35,0.12); color: var(--accent);
-      border: 1px solid rgba(245,166,35,0.25);
-    }
-    .prop-status {
-      font-size: 0.75rem; font-weight: 500;
-      padding: 4px 10px; border-radius: 100px;
-    }
+    .prop-header { padding: 20px 24px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+    .prop-type-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 100px; font-size: 0.78rem; font-weight: 500; background: rgba(245,166,35,0.12); color: var(--accent); border: 1px solid rgba(245,166,35,0.25); }
+    .prop-status { font-size: 0.75rem; font-weight: 500; padding: 4px 10px; border-radius: 100px; }
     .status-available { background: rgba(39,201,122,0.12); color: var(--green); border: 1px solid rgba(39,201,122,0.25); }
     .status-booked { background: rgba(232,69,69,0.12); color: var(--red); border: 1px solid rgba(232,69,69,0.25); }
     .prop-body { padding: 20px 24px; }
     .prop-name { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
-    .prop-addr { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; display: flex; align-items: center; gap: 4px; }
+    .prop-addr { color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; }
     .prop-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .prop-tag {
-      padding: 4px 10px; border-radius: 6px;
-      background: var(--card2); border: 1px solid var(--border);
-      font-size: 0.78rem; color: var(--muted);
-    }
-    .prop-footer {
-      padding: 16px 24px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-    }
+    .prop-tag { padding: 4px 10px; border-radius: 6px; background: var(--card2); border: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+    .prop-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
     .prop-rent { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--accent); }
     .prop-rent span { font-size: 0.75rem; color: var(--muted); font-family: 'DM Sans'; font-weight: 400; }
-
-    /* ── SEARCH BAR ── */
-    .search-bar {
-      display: flex; gap: 12px; flex-wrap: wrap;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px;
-      margin-bottom: 32px;
-    }
+    .search-bar { display: flex; gap: 12px; flex-wrap: wrap; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 32px; }
     .search-bar input, .search-bar select { flex: 1; min-width: 150px; }
-    .search-bar .btn { white-space: nowrap; }
-
-    /* ── EMPTY STATE ── */
     .empty { text-align: center; padding: 80px 40px; color: var(--muted); }
     .empty-icon { font-size: 3.5rem; margin-bottom: 16px; }
     .empty h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; color: var(--text); margin-bottom: 8px; }
-
-    /* ── BACK ROW ── */
     .top-row { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
     .top-row .sec-title { margin-bottom: 0; }
-
-    /* ── TOAST ── */
-    #toast {
-      position: fixed; bottom: 32px; right: 32px; z-index: 999;
-      background: var(--green); color: #fff;
-      padding: 14px 24px; border-radius: 12px;
-      font-weight: 500; font-size: 0.95rem;
-      transform: translateY(80px); opacity: 0;
-      transition: all 0.3s; pointer-events: none;
-      box-shadow: 0 8px 24px rgba(39,201,122,0.3);
-    }
+    #toast { position: fixed; bottom: 32px; right: 32px; z-index: 999; background: var(--green); color: #fff; padding: 14px 24px; border-radius: 12px; font-weight: 500; font-size: 0.95rem; transform: translateY(80px); opacity: 0; transition: all 0.3s; pointer-events: none; box-shadow: 0 8px 24px rgba(39,201,122,0.3); }
     #toast.show { transform: translateY(0); opacity: 1; }
     #toast.error { background: var(--red); box-shadow: 0 8px 24px rgba(232,69,69,0.3); }
-
-    /* ── BOOKING MODAL ── */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
-      display: none; align-items: center; justify-content: center; padding: 20px;
-    }
+    .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
-    .modal {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 40px;
-      max-width: 480px; width: 100%;
-    }
+    .modal { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; max-width: 480px; width: 100%; }
     .modal h3 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 24px; }
     .booking-detail { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
     .booking-detail:last-of-type { border-bottom: none; }
     .booking-detail .key { color: var(--muted); }
     .booking-detail .val { font-weight: 500; color: var(--accent); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      nav { padding: 16px 20px; }
-      .hero { padding: 70px 20px 60px; }
-      .panel-grid { grid-template-columns: 1fr; padding: 0 20px; }
-      .container { padding: 24px 20px; }
-      .form-row { grid-template-columns: 1fr; }
-      .form-card { padding: 24px 20px; }
-    }
+    .nav-user { display: flex; align-items: center; gap: 12px; }
+    .nav-user-name { font-size: 0.85rem; color: var(--muted); }
+    .password-wrap { position: relative; }
+    .password-wrap input { padding-right: 48px; }
+    .eye-btn { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; padding: 0; }
+    @media (max-width: 640px) { nav { padding: 16px 20px; } .hero { padding: 70px 20px 60px; } .panel-grid { grid-template-columns: 1fr; padding: 0 20px; } .container { padding: 24px 20px; } .form-row { grid-template-columns: 1fr; } .form-card { padding: 24px 20px; } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="logo">Student<span>Nest</span></div>
-  <button class="btn btn-outline btn-sm" onclick="goHome()" id="nav-back" style="display:none">← Back</button>
+  <div class="nav-user">
+    <span class="nav-user-name" id="nav-user-name"></span>
+    <button class="btn btn-ghost btn-sm" id="nav-logout" style="display:none" onclick="logout()">Logout</button>
+  </div>
 </nav>
 
-<!-- TOAST -->
 <div id="toast"></div>
 
-<!-- BOOKING MODAL -->
 <div class="modal-overlay" id="bookingModal">
   <div class="modal">
     <h3>🎉 Booking Confirmed!</h3>
     <div id="bookingDetails"></div>
-    <div style="margin-top:24px; display:flex; gap:12px;">
+    <div style="margin-top:24px;">
       <button class="btn btn-primary" onclick="closeModal()">Done</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 1: HOME                        -->
-<!-- ══════════════════════════════════════ -->
+<!-- ══ PAGE 1: HERO ══ -->
 <div class="screen active" id="screen-home">
   <div class="hero">
     <div class="hero-badge">🏠 Pakistan's Student Housing</div>
     <h1>Find Your Perfect<br/><em>Student Stay</em></h1>
     <p>Search hostels, rooms, houses & apartments. Owners list for free. Students book instantly.</p>
     <div class="hero-btns">
-      <button class="btn btn-primary" onclick="goTo('screen-role')">🚀 Get Started — Login Karo</button>
+      <button class="btn btn-primary" onclick="goTo('screen-auth')">🔐 Login / Register</button>
     </div>
   </div>
-
   <div class="stats">
     <div class="stat"><div class="stat-num" id="stat-props">0</div><div class="stat-label">Properties Listed</div></div>
     <div class="stat"><div class="stat-num" id="stat-available">0</div><div class="stat-label">Available Now</div></div>
-    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Cities Covered</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Cities Covered</div></div>
     <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Always Free</div></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 2: ROLE SELECT                 -->
-<!-- ══════════════════════════════════════ -->
+<!-- ══ PAGE 2: LOGIN / REGISTER ══ -->
+<div class="screen" id="screen-auth">
+  <div class="container">
+    <!-- LOGIN FORM -->
+    <div id="login-form">
+      <div class="form-card">
+        <div class="form-title">Welcome Back 👋</div>
+        <div class="form-subtitle">Login to your StudentNest account</div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="login-phone" placeholder="03XX-XXXXXXX"/>
+          <div class="error-msg" id="login-phone-err"></div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-wrap">
+            <input type="password" id="login-pass" placeholder="Enter your password"/>
+            <button class="eye-btn" onclick="togglePass('login-pass', this)">👁️</button>
+          </div>
+          <div class="error-msg" id="login-pass-err"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="doLogin()" style="width:100%">Login →</button>
+        </div>
+        <div class="form-switch">
+          New here? <a onclick="showRegister()">Register</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="register-form" style="display:none">
+      <div class="form-card">
+        <div class="form-title">Create Account 🚀</div>
+        <div class="form-subtitle">Create your free StudentNest account!</div>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="reg-name" placeholder="Muhammad Ali"/>
+          <div class="error-msg" id="reg-name-err"></div>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="reg-phone" placeholder="03XX-XXXXXXX"/>
+          <div class="error-msg" id="reg-phone-err"></div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="password-wrap">
+            <input type="password" id="reg-pass" placeholder="Create a strong password"/>
+            <button class="eye-btn" onclick="togglePass('reg-pass', this)">👁️</button>
+          </div>
+          <div class="error-msg" id="reg-pass-err"></div>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <div class="password-wrap">
+            <input type="password" id="reg-pass2" placeholder="Confirm your password"/>
+            <button class="eye-btn" onclick="togglePass('reg-pass2', this)">👁️</button>
+          </div>
+          <div class="error-msg" id="reg-pass2-err"></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="doRegister()" style="width:100%">Register & Continue →</button>
+        </div>
+        <div class="form-switch">
+          Already have an account? <a onclick="showLogin()">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE 3: ROLE SELECT ══ -->
 <div class="screen" id="screen-role">
   <div style="text-align:center; padding: 60px 40px 20px;">
-    <div class="sec-title">Who are you?</div>
-    <div class="sec-sub">Select your role to continue</div>
+    <div class="sec-title">Who Are You?</div>
+    <div class="sec-sub" id="role-welcome">Select your role to continue</div>
   </div>
   <div class="panel-grid">
-    <div class="panel-card" onclick="goTo('screen-owner-login')">
+    <div class="panel-card" onclick="selectRole('owner')">
       <div class="panel-icon">🏢</div>
       <div class="panel-title">Property Owner</div>
       <div class="panel-desc">List your hostel, room, house or apartment and reach thousands of students.</div>
     </div>
-    <div class="panel-card" onclick="goTo('screen-student-login')">
+    <div class="panel-card" onclick="selectRole('student')">
       <div class="panel-icon">🎓</div>
       <div class="panel-title">Student</div>
       <div class="panel-desc">Search and book verified properties near your university instantly.</div>
@@ -372,40 +240,13 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 3: OWNER LOGIN                 -->
-<!-- ══════════════════════════════════════ -->
-<div class="screen" id="screen-owner-login">
-  <div class="container">
-    <div class="top-row">
-      <button class="btn btn-ghost btn-sm" onclick="goTo('screen-role')">←</button>
-      <div class="sec-title">Owner Login</div>
-    </div>
-    <div class="form-card">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="owner-name" placeholder="Muhammad Ali"/>
-      </div>
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="tel" id="owner-phone" placeholder="03XX-XXXXXXX"/>
-      </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" onclick="ownerLogin()">Enter Dashboard →</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 4: OWNER DASHBOARD             -->
-<!-- ══════════════════════════════════════ -->
+<!-- ══ OWNER DASHBOARD ══ -->
 <div class="screen" id="screen-owner-dashboard">
   <div class="container">
     <div class="top-row">
       <div>
         <div class="sec-title">Owner Dashboard</div>
-        <div class="sec-sub" id="owner-welcome">Welcome back!</div>
+        <div class="sec-sub" id="owner-welcome">Welcome!</div>
       </div>
       <button class="btn btn-primary btn-sm" onclick="goTo('screen-add-property')">+ Add Property</button>
     </div>
@@ -413,9 +254,7 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 5: ADD PROPERTY                -->
-<!-- ══════════════════════════════════════ -->
+<!-- ══ ADD PROPERTY ══ -->
 <div class="screen" id="screen-add-property">
   <div class="container">
     <div class="top-row">
@@ -436,10 +275,10 @@
         <div class="form-group" id="room-type-group">
           <label>Room Type</label>
           <select id="room-type">
-            <option value="Single Seater">Single Seater</option>
-            <option value="Two Seater">Two Seater</option>
-            <option value="Three Seater">Three Seater</option>
-            <option value="Four Seater">Four Seater</option>
+            <option>Single Seater</option>
+            <option>Two Seater</option>
+            <option>Three Seater</option>
+            <option>Four Seater</option>
           </select>
         </div>
       </div>
@@ -447,12 +286,8 @@
         <div class="form-group">
           <label>City</label>
           <select id="prop-city">
-            <option>Lahore</option>
-            <option>Karachi</option>
-            <option>Islamabad</option>
-            <option>Faisalabad</option>
-            <option>Multan</option>
-            <option>Peshawar</option>
+            <option>Lahore</option><option>Karachi</option><option>Islamabad</option>
+            <option>Faisalabad</option><option>Multan</option><option>Peshawar</option>
           </select>
         </div>
         <div class="form-group">
@@ -476,34 +311,7 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 6: STUDENT LOGIN               -->
-<!-- ══════════════════════════════════════ -->
-<div class="screen" id="screen-student-login">
-  <div class="container">
-    <div class="top-row">
-      <button class="btn btn-ghost btn-sm" onclick="goTo('screen-role')">←</button>
-      <div class="sec-title">Student Login</div>
-    </div>
-    <div class="form-card">
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" id="student-name" placeholder="Ahmed Hassan"/>
-      </div>
-      <div class="form-group">
-        <label>Phone Number</label>
-        <input type="tel" id="student-phone" placeholder="03XX-XXXXXXX"/>
-      </div>
-      <div class="form-actions">
-        <button class="btn btn-primary" onclick="studentLogin()">Search Properties →</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 7: STUDENT SEARCH              -->
-<!-- ══════════════════════════════════════ -->
+<!-- ══ STUDENT SEARCH ══ -->
 <div class="screen" id="screen-student-search">
   <div class="container">
     <div class="top-row">
@@ -513,22 +321,8 @@
       </div>
     </div>
     <div class="search-bar">
-      <select id="search-city">
-        <option value="">All Cities</option>
-        <option>Lahore</option>
-        <option>Karachi</option>
-        <option>Islamabad</option>
-        <option>Faisalabad</option>
-        <option>Multan</option>
-        <option>Peshawar</option>
-      </select>
-      <select id="search-type">
-        <option value="">All Types</option>
-        <option value="Hostel">🏨 Hostel</option>
-        <option value="Room">🚪 Room</option>
-        <option value="House">🏠 House</option>
-        <option value="Apartment">🏢 Apartment</option>
-      </select>
+      <select id="search-city"><option value="">All Cities</option><option>Lahore</option><option>Karachi</option><option>Islamabad</option><option>Faisalabad</option><option>Multan</option><option>Peshawar</option></select>
+      <select id="search-type"><option value="">All Types</option><option value="Hostel">🏨 Hostel</option><option value="Room">🚪 Room</option><option value="House">🏠 House</option><option value="Apartment">🏢 Apartment</option></select>
       <input type="number" id="search-max-rent" placeholder="Max Rent (Rs)"/>
       <button class="btn btn-primary" onclick="searchProperties()">🔍 Search</button>
     </div>
@@ -536,23 +330,8 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ -->
-<!-- SCREEN 8: BROWSE (PUBLIC)             -->
-<!-- ══════════════════════════════════════ -->
-<div class="screen" id="screen-browse">
-  <div class="container">
-    <div class="top-row">
-      <button class="btn btn-ghost btn-sm" onclick="goHome()">←</button>
-      <div class="sec-title">All Properties</div>
-    </div>
-    <div id="browse-list"></div>
-  </div>
-</div>
-
 <script>
-// ══════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════
+// ══ STATE ══
 let properties = [
   { id:1, owner:"Ali Raza", ownerPhone:"0311-1234567", type:"Hostel", roomType:"Two Seater", city:"Lahore", address:"Block D, Johar Town", facilities:"WiFi, Mess, Laundry, Generator", rent:6000, available:true },
   { id:2, owner:"Sara Khan", ownerPhone:"0321-9876543", type:"Apartment", roomType:"-", city:"Karachi", address:"Clifton Block 5", facilities:"AC, WiFi, Parking, 24/7 Security", rent:18000, available:true },
@@ -560,35 +339,42 @@ let properties = [
   { id:4, owner:"Fatima Noor", ownerPhone:"0333-4445566", type:"Hostel", roomType:"Single Seater", city:"Lahore", address:"Muslim Town, Near UET", facilities:"WiFi, Mess, Study Room", rent:8500, available:false },
 ];
 let nextId = 5;
-let currentOwner = null;
-let currentStudent = null;
+let currentUser = null; // { name, phone, role }
 
-// ══════════════════════════════════════════
-//  NAVIGATION
-// ══════════════════════════════════════════
+// ══ USERS (saved in localStorage) ══
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem('sn_users') || '[]'); } catch(e) { return []; }
+}
+function saveUsers(users) {
+  localStorage.setItem('sn_users', JSON.stringify(users));
+}
+
+// ══ NAVIGATION ══
 function goTo(screenId) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(screenId).classList.add('active');
-  document.getElementById('nav-back').style.display = (screenId === 'screen-home') ? 'none' : 'inline-flex';
   window.scrollTo(0,0);
   if (screenId === 'screen-home') updateStats();
   if (screenId === 'screen-owner-dashboard') renderOwnerProps();
-  if (screenId === 'screen-browse') renderBrowse();
   if (screenId === 'screen-student-search') searchProperties();
 }
-function goHome() { goTo('screen-home'); }
 
-// ══════════════════════════════════════════
-//  STATS
-// ══════════════════════════════════════════
+function logout() {
+  currentUser = null;
+  document.getElementById('nav-user-name').textContent = '';
+  document.getElementById('nav-logout').style.display = 'none';
+  showLogin();
+  goTo('screen-auth');
+  toast('Logged out successfully! 👋');
+}
+
+// ══ STATS ══
 function updateStats() {
   document.getElementById('stat-props').textContent = properties.length;
   document.getElementById('stat-available').textContent = properties.filter(p=>p.available).length;
 }
 
-// ══════════════════════════════════════════
-//  TOAST
-// ══════════════════════════════════════════
+// ══ TOAST ══
 function toast(msg, isError=false) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -596,21 +382,99 @@ function toast(msg, isError=false) {
   setTimeout(() => t.className = '', 3000);
 }
 
-// ══════════════════════════════════════════
-//  OWNER
-// ══════════════════════════════════════════
-function ownerLogin() {
-  const name = document.getElementById('owner-name').value.trim();
-  const phone = document.getElementById('owner-phone').value.trim();
-  if (!name || !phone) { toast('Please fill all fields', true); return; }
-  currentOwner = { name, phone };
-  document.getElementById('owner-welcome').textContent = `Welcome, ${name}! 👋`;
-  goTo('screen-owner-dashboard');
+// ══ PASSWORD TOGGLE ══
+function togglePass(id, btn) {
+  const inp = document.getElementById(id);
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁️'; }
 }
 
+// ══ FORM SWITCH ══
+function showRegister() {
+  document.getElementById('login-form').style.display = 'none';
+  document.getElementById('register-form').style.display = 'block';
+}
+function showLogin() {
+  document.getElementById('login-form').style.display = 'block';
+  document.getElementById('register-form').style.display = 'none';
+}
+
+function clearErr(id) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = ''; }
+}
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = msg;
+}
+
+// ══ REGISTER ══
+function doRegister() {
+  clearErr('reg-name-err'); clearErr('reg-phone-err'); clearErr('reg-pass-err'); clearErr('reg-pass2-err');
+  const name  = document.getElementById('reg-name').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const pass  = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+  let valid = true;
+  if (!name)  { showErr('reg-name-err', '❌ Name is required'); valid = false; }
+  if (!phone) { showErr('reg-phone-err', '❌ Phone number is required'); valid = false; }
+  else if (!/^03\d{9}$/.test(phone.replace(/-/g,''))) { showErr('reg-phone-err', '❌ Enter valid Pakistani number (03XXXXXXXXX)'); valid = false; }
+  if (pass.length < 6) { showErr('reg-pass-err', '❌ Password must be at least 6 characters'); valid = false; }
+  if (pass !== pass2) { showErr('reg-pass2-err', '❌ Passwords do not match'); valid = false; }
+  if (!valid) return;
+  const users = getUsers();
+  if (users.find(u => u.phone === phone)) { showErr('reg-phone-err', '❌ This number is already registered'); return; }
+  users.push({ name, phone, pass });
+  saveUsers(users);
+  currentUser = { name, phone };
+  setNavUser(name);
+  document.getElementById('role-welcome').textContent = `Welcome, ${name}! Choose your role 👇`;
+  toast(`✅ Account created! Welcome ${name}!`);
+  goTo('screen-role');
+}
+
+// ══ LOGIN ══
+function doLogin() {
+  clearErr('login-phone-err'); clearErr('login-pass-err');
+  const phone = document.getElementById('login-phone').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  let valid = true;
+  if (!phone) { showErr('login-phone-err', '❌ Phone number likhein'); valid = false; }
+  if (!pass)  { showErr('login-pass-err', '❌ Password likhein'); valid = false; }
+  if (!valid) return;
+  const users = getUsers();
+  const user = users.find(u => u.phone === phone && u.pass === pass);
+  if (!user) { showErr('login-pass-err', '❌ Incorrect phone or password'); return; }
+  currentUser = { name: user.name, phone: user.phone };
+  setNavUser(user.name);
+  document.getElementById('role-welcome').textContent = `Welcome back, ${user.name}! Choose your role 👇`;
+  toast(`✅ Login successful! Welcome ${user.name}!`);
+  goTo('screen-role');
+}
+
+function setNavUser(name) {
+  document.getElementById('nav-user-name').textContent = name;
+  document.getElementById('nav-logout').style.display = 'inline-flex';
+}
+
+// ══ ROLE SELECT ══
+function selectRole(role) {
+  if (!currentUser) { goTo('screen-auth'); return; }
+  currentUser.role = role;
+  if (role === 'owner') {
+    document.getElementById('owner-welcome').textContent = `Welcome, ${currentUser.name}! 👋`;
+    goTo('screen-owner-dashboard');
+  } else {
+    document.getElementById('student-welcome').textContent = `Hello, ${currentUser.name}! Find your perfect stay 🎓`;
+    goTo('screen-student-search');
+    searchProperties();
+  }
+}
+
+// ══ OWNER ══
 function renderOwnerProps() {
   const container = document.getElementById('owner-props-list');
-  const myProps = properties.filter(p => p.owner === currentOwner?.name);
+  const myProps = properties.filter(p => p.owner === currentUser?.name);
   if (myProps.length === 0) {
     container.innerHTML = `<div class="empty"><div class="empty-icon">🏠</div><h3>No Properties Yet</h3><p>Add your first property to start receiving bookings</p><br/><button class="btn btn-primary" onclick="goTo('screen-add-property')">+ Add Property</button></div>`;
     return;
@@ -630,25 +494,13 @@ function addProperty() {
   const rent = parseFloat(document.getElementById('prop-rent').value);
   const address = document.getElementById('prop-address').value.trim();
   const facilities = document.getElementById('prop-facilities').value.trim();
-  if (!city || !rent || !address || !facilities) { toast('Please fill all fields', true); return; }
-  properties.push({ id: nextId++, owner: currentOwner.name, ownerPhone: currentOwner.phone, type, roomType, city, address, facilities, rent, available: true });
+  if (!rent || !address || !facilities) { toast('Please fill all fields!', true); return; }
+  properties.push({ id: nextId++, owner: currentUser.name, ownerPhone: currentUser.phone, type, roomType, city, address, facilities, rent, available: true });
   toast('✅ Property added successfully!');
   goTo('screen-owner-dashboard');
 }
 
-// ══════════════════════════════════════════
-//  STUDENT
-// ══════════════════════════════════════════
-function studentLogin() {
-  const name = document.getElementById('student-name').value.trim();
-  const phone = document.getElementById('student-phone').value.trim();
-  if (!name || !phone) { toast('Please fill all fields', true); return; }
-  currentStudent = { name, phone };
-  document.getElementById('student-welcome').textContent = `Hello, ${name}! Find your perfect stay 🎓`;
-  goTo('screen-student-search');
-  searchProperties();
-}
-
+// ══ STUDENT ══
 function searchProperties() {
   const city = document.getElementById('search-city')?.value || '';
   const type = document.getElementById('search-type')?.value || '';
@@ -670,13 +522,11 @@ function searchProperties() {
 
 function bookProperty(id) {
   const prop = properties.find(p => p.id === id);
-  if (!prop || !prop.available) { toast('Already booked!', true); return; }
-  if (!currentStudent) { toast('Please login first', true); return; }
+  if (!prop || !prop.available) { toast('This property is already booked!', true); return; }
   prop.available = false;
-  const details = document.getElementById('bookingDetails');
-  details.innerHTML = `
-    <div class="booking-detail"><span class="key">Booked By</span><span class="val">${currentStudent.name}</span></div>
-    <div class="booking-detail"><span class="key">Phone</span><span class="val">${currentStudent.phone}</span></div>
+  document.getElementById('bookingDetails').innerHTML = `
+    <div class="booking-detail"><span class="key">Booked By</span><span class="val">${currentUser.name}</span></div>
+    <div class="booking-detail"><span class="key">Phone</span><span class="val">${currentUser.phone}</span></div>
     <div class="booking-detail"><span class="key">Property</span><span class="val">${prop.type} — ${prop.city}</span></div>
     <div class="booking-detail"><span class="key">Address</span><span class="val">${prop.address}</span></div>
     <div class="booking-detail"><span class="key">Owner</span><span class="val">${prop.owner} (${prop.ownerPhone})</span></div>
@@ -686,51 +536,20 @@ function bookProperty(id) {
   searchProperties();
 }
 
-function closeModal() {
-  document.getElementById('bookingModal').classList.remove('open');
-}
+function closeModal() { document.getElementById('bookingModal').classList.remove('open'); }
 
-// ══════════════════════════════════════════
-//  BROWSE
-// ══════════════════════════════════════════
-function renderBrowse() {
-  const container = document.getElementById('browse-list');
-  container.innerHTML = `<div class="properties-grid">${properties.map(p => propCard(p, false)).join('')}</div>`;
-}
-
-// ══════════════════════════════════════════
-//  PROP CARD HTML
-// ══════════════════════════════════════════
+// ══ PROP CARD ══
 function propCard(p, canBook=false) {
   const typeEmoji = { Hostel:'🏨', Room:'🚪', House:'🏠', Apartment:'🏢' }[p.type] || '🏠';
   const tags = p.facilities.split(',').slice(0,3).map(f => `<span class="prop-tag">${f.trim()}</span>`).join('');
   const roomInfo = p.type === 'Hostel' ? `<span class="prop-tag">👥 ${p.roomType}</span>` : '';
   const bookBtn = canBook && p.available
     ? `<button class="btn btn-success btn-sm" onclick="bookProperty(${p.id})">Book Now</button>`
-    : canBook && !p.available
-    ? `<button class="btn btn-sm" style="background:var(--card2);color:var(--muted);cursor:not-allowed;" disabled>Booked</button>`
-    : '';
-  return `
-    <div class="prop-card">
-      <div class="prop-header">
-        <span class="prop-type-badge">${typeEmoji} ${p.type}</span>
-        <span class="prop-status ${p.available ? 'status-available' : 'status-booked'}">${p.available ? '● Available' : '● Booked'}</span>
-      </div>
-      <div class="prop-body">
-        <div class="prop-name">${p.owner}'s ${p.type}</div>
-        <div class="prop-addr">📍 ${p.address}, ${p.city}</div>
-        <div class="prop-meta">${roomInfo}${tags}</div>
-      </div>
-      <div class="prop-footer">
-        <div class="prop-rent">Rs ${p.rent.toLocaleString()} <span>/month</span></div>
-        ${bookBtn}
-      </div>
-    </div>`;
+    : canBook ? `<button class="btn btn-sm" style="background:var(--card2);color:var(--muted);cursor:not-allowed;" disabled>Booked</button>` : '';
+  return `<div class="prop-card"><div class="prop-header"><span class="prop-type-badge">${typeEmoji} ${p.type}</span><span class="prop-status ${p.available ? 'status-available' : 'status-booked'}">${p.available ? '● Available' : '● Booked'}</span></div><div class="prop-body"><div class="prop-name">${p.owner}'s ${p.type}</div><div class="prop-addr">📍 ${p.address}, ${p.city}</div><div class="prop-meta">${roomInfo}${tags}</div></div><div class="prop-footer"><div class="prop-rent">Rs ${p.rent.toLocaleString()} <span>/month</span></div>${bookBtn}</div></div>`;
 }
 
-// ══════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════
+// ══ INIT ══
 updateStats();
 toggleRoomType();
 </script>
